@@ -7,3 +7,5 @@ However I discovered - at least when working on my 8Gb Raspberry Pi 4 cluster - 
 The attached program is framed as a test program; at some point in the future I will probably make it into a function that can be called from your code in order to determine how much RAM to ask for, before making your one big malloc call at the head of your program.
 
 Just to be clear, it tries to work out how much RAM is actually available, not how much the address space allows for - it does actually take into account RAM that has already been taken by other processes.  And it is concerned with physical RAM, not virtual memory, on the grounds that if your code starts paging it will slow down by orders of magnitude - this is for code that is meant to run entirely within the working set of physical memory without ever needing to swap.
+
+After writing this, I found out about /proc/sys/vm/overcommit_memory from a discussion at stackexchange ( https://stackoverflow.com/questions/2798330/maximum-memory-which-malloc-can-allocate/ ), which gives some hints that might be useful in a later iteration.
